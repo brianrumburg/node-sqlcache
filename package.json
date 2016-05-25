@@ -1,0 +1,23 @@
+{
+  "name": "sqlcache",
+  "version": "0.0.1",
+  "description": "cache for sql queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brianrumburg/node-sqlcache.git"
+  },
+  "keywords": [
+    "sql",
+    "cache"
+  ],
+  "author": "Brian Rumburg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brianrumburg/node-sqlcache/issues"
+  },
+  "homepage": "https://github.com/brianrumburg/node-sqlcache#readme"
+}
