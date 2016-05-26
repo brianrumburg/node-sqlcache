@@ -2,7 +2,7 @@
   "name": "sqlcache",
   "version": "0.0.1",
   "description": "cache for sql queries",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "test"
   },
@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/brianrumburg/node-sqlcache/issues"
   },
-  "homepage": "https://github.com/brianrumburg/node-sqlcache#readme"
+  "homepage": "https://github.com/brianrumburg/node-sqlcache#readme",
+  "dependencies": {
+    "lodash": "^4.13.1",
+    "mssql": "^3.3.0"
+  }
 }
