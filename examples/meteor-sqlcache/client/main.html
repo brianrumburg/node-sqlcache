@@ -1,0 +1,61 @@
+<body>
+  <p>
+    Orders
+    {{> orders}}
+  </p>
+
+  <p>
+    Order Details
+    {{> orderDetails}}
+  </p>
+</body>
+
+<template name="orders">
+  <table border="1">
+    <tr>
+      <th>companyId</th>
+      <th>orderId</th>
+      <th>customerId</th>
+      <th>checksum</th>
+    </tr>
+  {{#each order in orders}}
+    {{> orderRow order}}
+  {{/each}}
+  </table>
+</template>
+
+<template name="orderRow">
+  <tr>
+    <td>{{companyId}}</td>
+    <td>{{orderId}}</td>
+    <td>{{customerId}}</td>
+    <td>{{checksum}}</td>
+  </tr>
+</template>
+
+<template name="orderDetails">
+  <table border="1">
+    <tr>
+      <th>companyId</th>
+      <th>orderId</th>
+      <th>orderDetailId</th>
+      <th>productId</th>
+      <th>qty</th>
+      <th>checksum</th>
+    </tr>
+  {{#each orderDetail in orderDetails}}
+    {{> orderDetailRow orderDetail}}
+  {{/each}}
+  </table>
+</template>
+
+<template name="orderDetailRow">
+  <tr>
+    <td>{{companyId}}</td>
+    <td>{{orderId}}</td>
+    <td>{{orderDetailId}}</td>
+    <td>{{productId}}</td>
+    <td>{{qty}}</td>
+    <td>{{checksum}}</td>
+  </tr>
+</template>

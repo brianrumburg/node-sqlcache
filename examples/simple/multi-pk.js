@@ -1,4 +1,4 @@
-var cache = require('../../');
+var cache = require('sqlcache');
 const rl = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
