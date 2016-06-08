@@ -27,13 +27,11 @@ var cache = sc.create({
 });
 
 var refresh = function() {
-  cache.refresh(
-    Orders.find({},{
-      companyId: 1,
-      orderId: 1,
-      checksum: 1
-    }).fetch()
-  );
+  cache.refresh(Orders.find({},{
+    companyId: 1,
+    orderId: 1,
+    checksum: 1
+  }).fetch());
 };
 
 var upsertHandler = Meteor.bindEnvironment(function(row) {
