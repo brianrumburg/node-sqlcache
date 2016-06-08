@@ -1,10 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import sc from 'sqlcache';
 
 var cache = sc.create({
-  host: 'localhost',
-  catalog: 'sqlcache',
-  username: 'sqlcache',
-  password: 'sqlcache',
+  connectionString: Meteor.settings.connectionString,
   keyColumns: [ 'companyId', 'orderId' ],
   checksumColumn: 'checksum',
   checksumQuery: `

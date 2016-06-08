@@ -1,0 +1,3 @@
+{
+    "connectionString": "mssql://sqlcache:sqlcache@localhost/sqlcache"
+}
