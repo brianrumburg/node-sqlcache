@@ -6,29 +6,28 @@ var cache = sc.create({
   keyColumns: [ 'companyId', 'orderId', 'orderDetailId' ],
   checksumColumn: 'checksum',
   checksumQuery: `
-    SELECT
-      companyId, orderId, orderDetailId,
-      CHECKSUM(productId, qty) checksum
-    FROM
-      OrderDetail
-  `,
+  SELECT
+    companyId, orderId, orderDetailId,
+    CHECKSUM(productId, qty) checksum
+  FROM
+    OrderDetail
+`,
   singleQuery: `
-    SELECT
-      companyId, orderId, orderDetailId,
-      productId, qty,
-      CHECKSUM(productId, qty) checksum
-    FROM
-      OrderDetail
-    WHERE
-      companyId = @companyId
-      AND orderId = @orderId
-      AND orderDetailId = @orderDetailId
-  `
+  SELECT
+    companyId, orderId, orderDetailId,
+    productId, qty,
+    CHECKSUM(productId, qty) checksum
+  FROM
+    OrderDetail
+  WHERE
+    companyId = @companyId
+    AND orderId = @orderId
+    AND orderDetailId = @orderDetailId
+`
 });
 
-var refresh = function() {
-  cache.refresh(
-    OrderDetails.find({},{
+var refresh = () => {
+  return cache.refresh(OrderDetails.find({},{
       companyId: 1,
       orderId: 1,
       orderDetailId: 1,

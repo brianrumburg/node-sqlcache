@@ -5,22 +5,27 @@ import caches from './caches';
 Meteor.startup(() => {
   var bus = mt.create();
 
-  bus.ready( Meteor.bindEnvironment(function() {
-  	bus.subscribe(
-      {queueName: 'meteor-sqlcache', messageType: 'SqlNotifier.Messages:TableChanged'},
-      Meteor.bindEnvironment(function(message) {
-        caches[message.table].refresh();
-  	  }
-    ));
-  }));
+  var onMessage = Meteor.bindEnvironment((message, envelope, queueName, reject) => {
+    caches[message.table].refresh().catch((e) => {
+      reject(e);
+    });
+  });
+
+  bus.ready(() => {
+    bus.subscribe({
+      queueName: 'meteor-sqlcache',
+      messageType: 'SqlNotifier.Messages:TableChanged'
+    }, onMessage);
+  });
 
   bus.init({
     host: 'rabbitmq-test',
     queueNames: ['meteor-sqlcache']
   });
 
-  _.forEach(caches, function(c) {
-    c.refresh();
+  _.forEach(caches, (c) => {
+    c.refresh()
+      .catch((err) => console.log('cache init error:', err.stack));
   });
 
 });
