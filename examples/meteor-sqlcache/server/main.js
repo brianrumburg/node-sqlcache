@@ -3,6 +3,8 @@ import mt from 'masstransit';
 import caches from './caches';
 
 Meteor.startup(() => {
+  console.log('startup');
+  
   var bus = mt.create();
 
   var onMessage = Meteor.bindEnvironment((message, envelope, queueName, reject) => {
@@ -21,11 +23,6 @@ Meteor.startup(() => {
   bus.init({
     host: 'rabbitmq-test',
     queueNames: ['meteor-sqlcache']
-  });
-
-  _.forEach(caches, (c) => {
-    c.refresh()
-      .catch((err) => console.log('cache init error:', err.stack));
   });
 
 });

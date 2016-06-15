@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import sc from 'sqlcache';
+import { OrderDetails } from '../../collections'
 
 var cache = sc.create({
   connectionString: Meteor.settings.connectionString,
+  verbose: true,
   keyColumns: [ 'companyId', 'orderId', 'orderDetailId' ],
   checksumColumn: 'checksum',
   checksumQuery: `
@@ -35,6 +37,15 @@ var refresh = () => {
     }).fetch()
   );
 };
+
+cache.on('ready', Meteor.bindEnvironment(() => {
+  console.log('OrderDetail cache ready. Refreshing...');
+  refresh().then(() => {
+    console.log('OrderDetail cache refresh complete.');
+  }).catch((err) => {
+    console.log('OrderDetail cache init error:', err.stack);
+  });
+}));
 
 var upsertHandler = Meteor.bindEnvironment(function(row) {
   OrderDetails.upsert({
