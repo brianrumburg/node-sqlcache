@@ -4,7 +4,7 @@ import { OrderDetails } from '../../collections'
 
 var cache = sc.create({
   connectionString: Meteor.settings.connectionString,
-  verbose: true,
+  verbose: Meteor.settings.verbose,
   keyColumns: [ 'companyId', 'orderId', 'orderDetailId' ],
   checksumColumn: 'checksum',
   checksumQuery: `

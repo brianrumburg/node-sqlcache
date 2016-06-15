@@ -1,3 +1,4 @@
 {
-    "connectionString": "mssql://sqlcache:sqlcache@localhost/sqlcache"
+    "connectionString": "mssql://sqlcache:sqlcache@localhost/sqlcache",
+    "verbose": true
 }
