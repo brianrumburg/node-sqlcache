@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import mt from 'masstransit';
-import caches from './caches'
+import caches from './caches';
 
 Meteor.startup(() => {
   var bus = mt.create();
@@ -16,7 +16,7 @@ Meteor.startup(() => {
 
   bus.init({
     host: 'rabbitmq-test',
-    queueNames: ['meteor-sqlcache'],
+    queueNames: ['meteor-sqlcache']
   });
 
   _.forEach(caches, function(c) {
