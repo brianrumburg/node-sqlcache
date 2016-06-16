@@ -1,21 +1,38 @@
 import { Meteor } from 'meteor/meteor';
 import mt from 'masstransit';
 import caches from './caches';
+import Promise from 'promise';
 
 Meteor.startup(() => {
   console.log('startup');
   
   var bus = mt.create();
 
-  var onMessage = Meteor.bindEnvironment((message, envelope, queueName, reject) => {
-    caches[message.table].refresh().catch((e) => {
-      reject(e);
-    });
+  var boundMessageHandler = Meteor.bindEnvironment(function(message, fulfill, reject) {
 
     if(message.table === 'Order') {
-      caches.RecentOrder.refresh().catch((e) => {
+
+      Promise.all([
+        caches.Order.refresh(),
+        caches.RecentOrder.refresh()
+      ])
+      .then(() => {
+        fulfill();
+      })
+      .catch((e) => {
         reject(e);
       });
+
+    } else {
+
+      caches[message.table].refresh()
+      .then(() => {
+        fulfill();
+      })
+      .catch((e) => {
+        reject(e);
+      });
+
     }
   });
 
@@ -23,7 +40,11 @@ Meteor.startup(() => {
     bus.subscribe({
       queueName: 'meteor-sqlcache',
       messageType: 'SqlNotifier.Messages:TableChanged'
-    }, onMessage);
+    }, (message) => {
+      return new Promise(function(fulfill, reject) {
+        boundMessageHandler(message, fulfill, reject);
+      });
+    });
   });
 
   bus.init({
