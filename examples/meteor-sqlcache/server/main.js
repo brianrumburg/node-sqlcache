@@ -11,6 +11,12 @@ Meteor.startup(() => {
     caches[message.table].refresh().catch((e) => {
       reject(e);
     });
+
+    if(message.table === 'Order') {
+      caches.RecentOrder.refresh().catch((e) => {
+        reject(e);
+      });
+    }
   });
 
   bus.ready(() => {

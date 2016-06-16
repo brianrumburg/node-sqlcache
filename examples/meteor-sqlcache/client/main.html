@@ -5,6 +5,11 @@
   </p>
 
   <p>
+      Recent Orders
+      {{> recentOrders}}
+  </p>
+
+  <p>
     Order Details
     {{> orderDetails}}
   </p>
@@ -21,6 +26,7 @@
       <th>companyId</th>
       <th>orderId</th>
       <th>customerId</th>
+      <th>orderDate</th>
       <th>checksum</th>
     </tr>
   {{#each order in orders}}
@@ -29,11 +35,28 @@
   </table>
 </template>
 
+
+<template name="recentOrders">
+    <table border="1">
+        <tr>
+            <th>companyId</th>
+            <th>orderId</th>
+            <th>customerId</th>
+            <th>orderDate</th>
+            <th>checksum</th>
+        </tr>
+        {{#each order in recentOrders}}
+            {{> orderRow order}}
+        {{/each}}
+    </table>
+</template>
+
 <template name="orderRow">
   <tr>
     <td>{{companyId}}</td>
     <td>{{orderId}}</td>
     <td>{{customerId}}</td>
+    <td>{{orderDate}}</td>
     <td>{{checksum}}</td>
   </tr>
 </template>

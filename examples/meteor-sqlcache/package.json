@@ -5,8 +5,9 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0",
     "masstransit": "^0.2.0",
+    "meteor-node-stubs": "~0.2.0",
+    "moment": "^2.13.0",
     "sqlcache": "0.0.1"
   }
 }

@@ -1,5 +1,5 @@
 import { Template } from 'meteor/templating';
-import { Orders, OrderDetails, ProductTypes } from '../collections';
+import { Orders, OrderDetails, ProductTypes, RecentOrders } from '../collections';
 
 import './main.html';
 
@@ -18,5 +18,11 @@ Template.orderDetails.helpers({
 Template.productTypes.helpers({
   productTypes() {
     return ProductTypes.find().fetch();
+  }
+});
+
+Template.recentOrders.helpers({
+  recentOrders() {
+    return RecentOrders.find().fetch();
   }
 });
