@@ -8,6 +8,11 @@
     Order Details
     {{> orderDetails}}
   </p>
+
+  <p>
+      Product Types
+      {{> productTypes}}
+  </p>
 </body>
 
 <template name="orders">
@@ -58,4 +63,25 @@
     <td>{{qty}}</td>
     <td>{{checksum}}</td>
   </tr>
+</template>
+
+<template name="productTypes">
+    <table border="1">
+        <tr>
+            <th>productTypeId</th>
+            <th>productTypeDescription</th>
+            <th>checksum</th>
+        </tr>
+        {{#each productType in productTypes}}
+            {{> productTypeRow productType}}
+        {{/each}}
+    </table>
+</template>
+
+<template name="productTypeRow">
+    <tr>
+        <td>{{productTypeId}}</td>
+        <td>{{productTypeDescription}}</td>
+        <td>{{checksum}}</td>
+    </tr>
 </template>
