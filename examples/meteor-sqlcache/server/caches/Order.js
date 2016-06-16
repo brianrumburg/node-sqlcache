@@ -28,9 +28,11 @@ var cache = sc.create({
 
 var refresh = function() {
   return cache.refresh(Orders.find({},{
-    companyId: 1,
-    orderId: 1,
-    checksum: 1
+    fields: {
+      companyId: 1,
+      orderId: 1,
+      checksum: 1
+    }
   }).fetch());
 };
 

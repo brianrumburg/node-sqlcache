@@ -30,12 +30,13 @@ var cache = sc.create({
 
 var refresh = () => {
   return cache.refresh(OrderDetails.find({},{
+    fields: {
       companyId: 1,
       orderId: 1,
       orderDetailId: 1,
       checksum: 1
-    }).fetch()
-  );
+    }
+  }).fetch());
 };
 
 cache.on('ready', Meteor.bindEnvironment(() => {
